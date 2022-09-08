@@ -20,7 +20,7 @@ class _CountDownTimeAppDemoState extends State<CountDownTimeAppDemo> {
         appBar: AppBar(
           title: const Text('Count Down Time Demo'),
         ),
-        body: Padding(
+        body: Container(
             padding: const EdgeInsets.all(15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

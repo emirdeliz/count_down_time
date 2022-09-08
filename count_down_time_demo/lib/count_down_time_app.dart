@@ -70,7 +70,7 @@ class _CountDownTimeAppState extends State<CountDownTimeApp> {
               setState(() {
                 timeoutReached = true;
               });
-            }, // 15minutes
+            },
           ),
           Container(
               padding: const EdgeInsets.only(top: 10),
