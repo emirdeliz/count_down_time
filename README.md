@@ -63,14 +63,14 @@ The widget has two factories to work with minutes and hours on count-down start.
 
 Minutes:
 ```dart
-CountDownTimeApp.minutes(
+CountDownTime.minutes(
 	timeStartInMinutes: 2
 )
 ```
 
 Hours:
 ```dart
-CountDownTimeApp.hours(
+CountDownTime.hours(
 	timeStartInHours: 2
 )
 ```
