@@ -11,39 +11,39 @@ Below the simple example:
 
 ```dart
 Column(
-    mainAxisSize: MainAxisSize.max,
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      CountDownTime(
-        timeId: 'simple-timer',
-        color: Colors.red,
-        fontSize: 15,
-        timeStartInSeconds: 30,
-        onChangeTime: (time) {
-          setState(() {
-            timeoutReached = false;
-          });
-        },
-        onTimeOut: () {
-          setState(() {
-            timeoutReached = true;
-          });
-        },
-      ),
-      Container(
-          padding: const EdgeInsets.only(top: 10),
-          alignment: Alignment.center,
-          child: ElevatedButton(
-            child: const Text('Restart count'),
-            onPressed: () {
-              CountDownTimeController.pushTimerRenewId(widget.id);
-            },
-          )),
-      Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Text(timeoutReached ? 'Timeout Reached' : ''))
-    ])
+  mainAxisSize: MainAxisSize.max,
+  mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+  CountDownTime(
+  timeId: 'simple-timer',
+  color: Colors.red,
+  fontSize: 15,
+  timeStartInSeconds: 30,
+  onChangeTime: (time) {
+    setState(() {
+      timeoutReached = false;
+    });
+  },
+  onTimeOut: () {
+    setState(() {
+      timeoutReached = true;
+    });
+  },
+  ),
+  Container(
+    padding: const EdgeInsets.only(top: 10),
+    alignment: Alignment.center,
+    child: ElevatedButton(
+      child: const Text('Restart count'),
+      onPressed: () {
+        CountDownTimeController.pushTimerRenewId(widget.id);
+      },
+    )),
+  Padding(
+    padding: const EdgeInsets.only(top: 10),
+    child: Text(timeoutReached ? 'Timeout Reached' : ''))
+  ])
 ```
 For more details see the project demo in the [demo
 ](https://github.com/emirdeliz/count_down_time/tree/master/count_down_time_demo)folder.
@@ -66,13 +66,13 @@ The widget has two factories to work with minutes and hours on count-down start.
 Minutes:
 ```dart
 CountDownTime.minutes(
-	timeStartInMinutes: 2
+  timeStartInMinutes: 2
 )
 ```
 
 Hours:
 ```dart
 CountDownTime.hours(
-	timeStartInHours: 2
+  timeStartInHours: 2
 )
 ```
