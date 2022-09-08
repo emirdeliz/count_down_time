@@ -18,17 +18,32 @@ class _CountDownTimeAppDemoState extends State<CountDownTimeAppDemo> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Count Down Time Demo'),
         ),
-        body: Row(
-          children: const [
-            CountDownTimeApp(
-                id: 'test-1',
-                color: Colors.red,
-                fontSize: 35,
-                timeStartInSeconds: 15 * 50)
-          ],
-        ),
+        body: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const CountDownTimeApp(
+                    id: 'test-1',
+                    color: Colors.red,
+                    fontSize: 35,
+                    timeStartInSeconds: 30),
+                CountDownTimeApp.minutes(
+                    id: 'test-2',
+                    color: Colors.red,
+                    fontSize: 35,
+                    timeStartInMinutes: 15),
+                CountDownTimeApp.hours(
+                    id: 'test-3',
+                    color: Colors.red,
+                    fontSize: 35,
+                    timeStartInHours: 1)
+              ],
+            )),
       ),
     );
   }

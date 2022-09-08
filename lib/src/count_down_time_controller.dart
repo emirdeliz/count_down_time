@@ -21,12 +21,18 @@ class CountDownTimeController {
     _countDownTimeRenewld.add(timerId);
   }
 
-  static formatSecondsToTime(int timeInSecond) {
-    int sec = timeInSecond % 60;
-    int min = (timeInSecond / 60).floor();
-    String minute = min.toString().length <= 1 ? "0$min" : "$min";
-    String second = sec.toString().length <= 1 ? "0$sec" : "$sec";
-    return "$minute:$second";
+  static formatSecondsToTime(int timeInSecond, int timeStartInSeconds) {
+    int second = timeInSecond % 60;
+    int minute = (timeInSecond / 60).floor();
+    int hour = (minute / 60).floor();
+
+    bool showMinutes = (timeStartInSeconds / 60).floor() > 0;
+    bool showHours = (timeStartInSeconds / 60 / 60).floor() > 0;
+
+    String secondStr = second.toString().length <= 1 ? "0$second" : "$second";
+    String minuteStr = minute.toString().length <= 1 ? "0$minute" : "$minute";
+    String hourStr = minute.toString().length <= 1 ? "0$hour" : "$hour";
+    return "${showHours ? '$hourStr:' : ''}${showMinutes ? '$minuteStr:' : ''}$secondStr";
   }
 
   void setId(String id) {
