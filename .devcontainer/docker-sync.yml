@@ -31,7 +31,7 @@ syncs:
     # sync_host_ip: 'localhost'
     # Should be a unique port this sync instance uses on the host to offer the rsync service on (do not use this for unison - not needed there.)
     # sync_host_port: 10871
-    src: './../..'
+    src: '..'
     # Exclude some files / directories that matches **exactly** the path
     # this currently use the the -Path option of unison, use sync_excludes_type to change this behavior
     # see http://www.cis.upenn.edu/~bcpierce/unison/download/releases/stable/unison-manual.html#pathspec for more
