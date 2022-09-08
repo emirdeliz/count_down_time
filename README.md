@@ -21,28 +21,28 @@ Column(
 	fontSize: 15,
 	timeStartInSeconds: 30,
 	onChangeTime: (time) {
-	  setState(() {
-	    timeoutReached = false;
-	  });
+		setState(() {
+			timeoutReached = false;
+		});
 	},
 	onTimeOut: () {
-	  setState(() {
-	    timeoutReached = true;
-	  });
+		setState(() {
+			timeoutReached = true;
+		});
 	},
 	),
 	Container(
-	  padding: const EdgeInsets.only(top: 10),
-	  alignment: Alignment.center,
-	  child: ElevatedButton(
-	    child: const Text('Restart count'),
-	    onPressed: () {
-	      CountDownTimeController.pushTimerRenewId(widget.id);
-	    },
-	  )),
+		padding: const EdgeInsets.only(top: 10),
+		alignment: Alignment.center,
+		child: ElevatedButton(
+			child: const Text('Restart count'),
+			onPressed: () {
+				CountDownTimeController.pushTimerRenewId(widget.id);
+			},
+		)),
 	Padding(
-	  padding: const EdgeInsets.only(top: 10),
-	  child: Text(timeoutReached ? 'Timeout Reached' : ''))
+		padding: const EdgeInsets.only(top: 10),
+		child: Text(timeoutReached ? 'Timeout Reached' : ''))
 	])
 ```
 For more details see the project demo in the [demo
