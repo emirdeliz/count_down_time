@@ -3,6 +3,8 @@ import 'dart:async';
 class CountDownTimeController {
   int _currentTimeInSeconds = 0;
   String _countDownTimeId = '';
+  Timer? _timerInstance;
+
   static final List<String> _countDownTimeRenewld =
       List<String>.empty(growable: true);
 
@@ -22,16 +24,17 @@ class CountDownTimeController {
   }
 
   static formatSecondsToTime(int timeInSecond, int timeStartInSeconds) {
-    int second = timeInSecond % 60;
-    int minute = (timeInSecond / 60).floor();
-    int hour = (minute / 60).floor();
+    DateTime dateBase = DateTime(2000, 1, 1, 0, 0, timeInSecond);
+    int second = dateBase.second;
+    int minute = dateBase.minute;
+    int hour = dateBase.hour;
 
     bool showMinutes = (timeStartInSeconds / 60).floor() > 0;
-    bool showHours = (timeStartInSeconds / 60 / 60).floor() > 0;
+    bool showHours = (timeStartInSeconds / 3600).floor() > 0;
 
     String secondStr = second.toString().length <= 1 ? "0$second" : "$second";
     String minuteStr = minute.toString().length <= 1 ? "0$minute" : "$minute";
-    String hourStr = minute.toString().length <= 1 ? "0$hour" : "$hour";
+    String hourStr = hour.toString().length <= 1 ? "0$hour" : "$hour";
     return "${showHours ? '$hourStr:' : ''}${showMinutes ? '$minuteStr:' : ''}$secondStr";
   }
 
@@ -45,7 +48,7 @@ class CountDownTimeController {
 
   void startTimer(int timerDefaultValue, Function(int, Timer) timeCallback) {
     const oneSecondDurantion = Duration(seconds: 1);
-    Timer.periodic(
+    _timerInstance = Timer.periodic(
       oneSecondDurantion,
       (Timer timer) {
         final timerResetPending =
@@ -55,6 +58,10 @@ class CountDownTimeController {
             : _currentTimeInSeconds - 1;
         timeCallback(_currentTimeInSeconds, timer);
       },
-    ).hashCode;
+    );
+  }
+
+  void stopTimer() {
+    _timerInstance?.cancel();
   }
 }

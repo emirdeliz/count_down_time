@@ -49,7 +49,7 @@ class CountDownTime extends StatefulWidget {
       required Function() onTimeOut}) {
     return CountDownTime.minutes(
         timeId: timeId,
-        timeStartInMinutes: (timeStartInHours ?? 1) * 60 * 60,
+        timeStartInMinutes: (timeStartInHours ?? 1) * 60,
         fontSize: fontSize,
         color: color,
         onChangeTime: onChangeTime,
@@ -107,6 +107,12 @@ class _CountDownTimeState extends State<CountDownTime> {
   void initState() {
     super.initState();
     _initialize();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timeController.stopTimer();
   }
 
   @override

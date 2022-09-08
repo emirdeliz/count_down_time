@@ -36,12 +36,12 @@ class _CountDownTimeAppDemoState extends State<CountDownTimeAppDemo> {
                     id: 'test-2',
                     color: Colors.red,
                     fontSize: 35,
-                    timeStartInMinutes: 15),
+                    timeStartInMinutes: 2),
                 CountDownTimeApp.hours(
                     id: 'test-3',
                     color: Colors.red,
                     fontSize: 35,
-                    timeStartInHours: 1)
+                    timeStartInHours: 2)
               ],
             )),
       ),
