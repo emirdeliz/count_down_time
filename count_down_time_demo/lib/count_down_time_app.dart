@@ -72,8 +72,9 @@ class _CountDownTimeAppState extends State<CountDownTimeApp> {
               });
             }, // 15minutes
           ),
-          Padding(
+          Container(
               padding: const EdgeInsets.only(top: 10),
+              alignment: Alignment.center,
               child: ElevatedButton(
                 child: const Text('Restart count'),
                 onPressed: () {

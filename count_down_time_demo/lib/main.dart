@@ -22,9 +22,9 @@ class _CountDownTimeAppDemoState extends State<CountDownTimeAppDemo> {
         ),
         body: Padding(
             padding: const EdgeInsets.all(15),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
                 const CountDownTimeApp(
