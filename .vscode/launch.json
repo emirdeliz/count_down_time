@@ -1,0 +1,44 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "CC Base Web Docker",
+			"cwd": "flut_base_web_condoconta",
+			"request": "launch",
+			"type": "dart",
+			"args": [
+				"--web-port=9191",
+				"--web-hostname=0.0.0.0",
+				"--hot",
+			],
+			"program": "lib/main_dev.dart"
+		},
+		{
+			"name": "CC Show Room Docker",
+			"cwd": "flut_base_app_show_room",
+			"request": "launch",
+			"type": "dart",
+			"args": [
+				"--web-port=9191",
+				"--web-hostname=0.0.0.0",
+				"--hot",
+			],
+			"program": "lib/main.dart"
+		},
+		{
+			"name": "CC Poc Web Docker",
+			"cwd": "flut_poc_web",
+			"request": "launch",
+			"type": "dart",
+			"args": [
+				"--web-port=9191",
+				"--web-hostname=0.0.0.0",
+				"--hot",
+			],
+			"program": "lib/main.dart"
+		}
+	]
+}

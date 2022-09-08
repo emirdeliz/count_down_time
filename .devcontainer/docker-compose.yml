@@ -1,0 +1,18 @@
+version: '3.2'
+services:
+  app-service:
+    platform: linux/arm64
+    image: emirdeliz/gitlab-ci-flutter
+    ports:
+      - 4002:4002
+      - 35729:35729
+      - 9191:9191
+    stdin_open: true
+    ipc: host
+    volumes:
+      - app-unison-sync:/home/docker/apps:nocopy
+      - ~/.ssh:/root/.ssh
+
+volumes:
+  app-unison-sync:
+      name: ${SYNC_NAME}-unison-sync
