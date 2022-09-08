@@ -1,5 +1,5 @@
+import 'package:count_down_time_demo/count_down_time_app.dart';
 import 'package:flutter/material.dart';
-import 'package:count_down_time/count_down_time.dart';
 
 void main() {
   runApp(const CountDownTimeAppDemo());
@@ -21,11 +21,11 @@ class _CountDownTimeAppDemoState extends State<CountDownTimeAppDemo> {
           title: const Text('Plugin example app'),
         ),
         body: Row(
-          children: [
+          children: const [
             CountDownTimeApp(
                 id: 'test-1',
                 color: Colors.red,
-                fontSize: 15,
+                fontSize: 35,
                 timeStartInSeconds: 15 * 50)
           ],
         ),
