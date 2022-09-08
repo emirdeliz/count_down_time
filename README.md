@@ -4,7 +4,7 @@
 
 This widget render a simple count-down time.
 
-<img src="https://raw.githubusercontent.com/emirdeliz/count_down_time/master/assets/example.gif" width="300" height="auto" alt="Menu float - example"/>
+<img src="https://raw.githubusercontent.com/emirdeliz/count_down_time/master/assets/example.gif" width="200" height="auto" alt="Menu float - example"/>
 
 ## Getting Started
 Below the simple example:
