@@ -1,4 +1,4 @@
-name: count_down_time_example
+name: count_down_time_demo
 description: Demonstrates how to use the count_down_time plugin.
 
 # The following line prevents the package from being accidentally published to
