@@ -29,13 +29,12 @@ class CountDownTimeController {
     int minute = dateBase.minute;
     int hour = dateBase.hour;
 
-    bool showMinutes = (timeStartInSeconds / 60).floor() > 0;
     bool showHours = (timeStartInSeconds / 3600).floor() > 0;
 
     String secondStr = second.toString().length <= 1 ? "0$second" : "$second";
     String minuteStr = minute.toString().length <= 1 ? "0$minute" : "$minute";
     String hourStr = hour.toString().length <= 1 ? "0$hour" : "$hour";
-    return "${showHours ? '$hourStr:' : ''}${showMinutes ? '$minuteStr:' : ''}$secondStr";
+    return "${showHours ? '$hourStr:' : ''}$minuteStr:$secondStr";
   }
 
   void setId(String id) {
@@ -44,6 +43,10 @@ class CountDownTimeController {
 
   int getCurrentTimeInSeconds() {
     return _currentTimeInSeconds;
+  }
+
+  void setCurrentTimeInSeconds(int time) {
+    _currentTimeInSeconds = time;
   }
 
   void startTimer(int timerDefaultValue, Function(int, Timer) timeCallback) {

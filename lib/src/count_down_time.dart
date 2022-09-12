@@ -59,17 +59,17 @@ class CountDownTime extends StatefulWidget {
 
 class _CountDownTimeState extends State<CountDownTime> {
   int _currentTimerSeconds = 0;
-  CountDownTimeController timeController = CountDownTimeController();
+  CountDownTimeController _timeController = CountDownTimeController();
 
   void _initialize() {
-    timeController.setId(widget.timeId);
+    _timeController.setId(widget.timeId);
     _renewTimer();
     _startTimer();
 
     final onChangeTime = widget.onChangeTime;
     if (onChangeTime != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        onChangeTime(timeController.getCurrentTimeInSeconds());
+        onChangeTime(_timeController.getCurrentTimeInSeconds());
       });
     }
   }
@@ -78,8 +78,12 @@ class _CountDownTimeState extends State<CountDownTime> {
     CountDownTimeController.pushTimerRenewId(widget.timeId);
   }
 
+  void _resetTimer() {
+    _timeController.setCurrentTimeInSeconds(widget.timeStartInSeconds);
+  }
+
   void _startTimer() {
-    timeController.startTimer(widget.timeStartInSeconds, (timeCurrent, timer) {
+    _timeController.startTimer(widget.timeStartInSeconds, (timeCurrent, timer) {
       setState(() {
         _currentTimerSeconds = timeCurrent;
       });
@@ -103,6 +107,14 @@ class _CountDownTimeState extends State<CountDownTime> {
     );
   }
 
+  void _maybeUpdateTimeStart(covariant CountDownTime oldWidget) {
+    final hasNewTimeStart =
+        oldWidget.timeStartInSeconds != widget.timeStartInSeconds;
+    if (hasNewTimeStart) {
+      _resetTimer();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -112,7 +124,13 @@ class _CountDownTimeState extends State<CountDownTime> {
   @override
   void dispose() {
     super.dispose();
-    timeController.stopTimer();
+    _timeController.stopTimer();
+  }
+
+  @override
+  void didUpdateWidget(covariant CountDownTime oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _maybeUpdateTimeStart(oldWidget);
   }
 
   @override
