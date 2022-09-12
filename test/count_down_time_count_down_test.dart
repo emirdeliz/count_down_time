@@ -10,7 +10,7 @@ void main() {
 
       final result = await waitForTimeRender(() async {
         final el = find.byType(Text, skipOffstage: false).first.evaluate();
-        return el.isNotEmpty && (el.single.widget as Text).data == '25';
+        return el.isNotEmpty && (el.single.widget as Text).data == '00:25';
       }, tester, 0);
 
       expect(result, true);
