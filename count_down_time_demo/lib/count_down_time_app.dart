@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:count_down_time/count_down_time.dart';
 
 class CountDownTimeApp extends StatefulWidget {
-  final String id;
   final Color color;
   final double fontSize;
   final int timeStartInSeconds;
 
   const CountDownTimeApp(
       {Key? key,
-      required this.id,
       required this.color,
       required this.fontSize,
       required this.timeStartInSeconds})
@@ -23,10 +21,8 @@ class CountDownTimeApp extends StatefulWidget {
   factory CountDownTimeApp.minutes(
       {required int timeStartInMinutes,
       required double fontSize,
-      required Color color,
-      required String id}) {
+      required Color color}) {
     return CountDownTimeApp(
-        id: id,
         timeStartInSeconds: timeStartInMinutes * 60,
         fontSize: fontSize,
         color: color);
@@ -36,10 +32,8 @@ class CountDownTimeApp extends StatefulWidget {
     required int timeStartInHours,
     required double fontSize,
     required Color color,
-    required String id,
   }) {
     return CountDownTimeApp.minutes(
-        id: id,
         timeStartInMinutes: timeStartInHours * 60,
         fontSize: fontSize,
         color: color);
@@ -48,6 +42,7 @@ class CountDownTimeApp extends StatefulWidget {
 
 class _CountDownTimeAppState extends State<CountDownTimeApp> {
   bool timeoutReached = false;
+  CountDownTimeController controller = CountDownTimeController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +52,6 @@ class _CountDownTimeAppState extends State<CountDownTimeApp> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CountDownTime(
-            timeId: widget.id,
             color: widget.color,
             fontSize: widget.fontSize,
             timeStartInSeconds: widget.timeStartInSeconds,
@@ -78,7 +72,7 @@ class _CountDownTimeAppState extends State<CountDownTimeApp> {
               child: ElevatedButton(
                 child: const Text('Restart count'),
                 onPressed: () {
-                  CountDownTimeController.pushTimerRenewId(widget.id);
+                  controller.resetTimer();
                 },
               )),
           Padding(

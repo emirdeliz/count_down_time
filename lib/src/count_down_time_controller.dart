@@ -1,29 +1,55 @@
 import 'dart:async';
 
-class CountDownTimeController {
-  int _currentTimeInSeconds = 0;
-  String _countDownTimeId = '';
-  Timer? _timerInstance;
+import 'package:count_down_time/count_down_time.dart';
+import 'package:flutter/cupertino.dart';
 
-  static final List<String> _countDownTimeRenewld =
-      List<String>.empty(growable: true);
+class CountDownTimeController extends ChangeNotifier {
+  int timeStartInSeconds = 0;
+  int currentTimerSeconds = 0;
+  Timer? timerInstance;
 
-  static String popCountDownTimeRenewId(String timerId) {
-    int indexValue = _countDownTimeRenewld.indexOf(timerId);
-    return indexValue > -1
-        ? _countDownTimeRenewld.removeAt(indexValue)
-        : indexValue.toString();
+  void startTimer(int timerDefaultValue, Function(int) timeCallback) {
+    timerInstance = Timer.periodic(
+      const Duration(seconds: 1),
+      (Timer timer) {
+        timeCallback(currentTimerSeconds);
+      },
+    );
   }
 
-  static List<String> getResetCountDownTimeRenewld() {
-    return _countDownTimeRenewld;
+  void stopTimer() {
+    timerInstance?.cancel();
   }
 
-  static void pushTimerRenewId(String timerId) {
-    _countDownTimeRenewld.add(timerId);
+  void setTimeStartInSeconds(int value) {
+    timeStartInSeconds = value;
   }
 
-  static formatSecondsToTime(int timeInSecond, int timeStartInSeconds) {
+  void setCurrentTimeInSeconds(int value) {
+    currentTimerSeconds = value;
+    notifyListeners();
+  }
+
+  int getCurrentTimeInSeconds() {
+    return currentTimerSeconds;
+  }
+
+  String getCurrengetCurrentTimeInSecondsFormatted() {
+    return formatSecondsToTime(currentTimerSeconds, timeStartInSeconds);
+  }
+
+  void resetTimer() {
+    currentTimerSeconds = timeStartInSeconds;
+  }
+
+  void maybeUpdateTimeStart(covariant CountDownTime oldWidget) {
+    final hasNewTimeStart = oldWidget.timeStartInSeconds != timeStartInSeconds;
+    if (hasNewTimeStart) {
+      resetTimer();
+    }
+  }
+
+  String formatSecondsToTime(int timeInSecond, int timeStartInSeconds) {
     DateTime dateBase = DateTime(2000, 1, 1, 0, 0, timeInSecond);
     int second = dateBase.second;
     int minute = dateBase.minute;
@@ -35,36 +61,5 @@ class CountDownTimeController {
     String minuteStr = minute.toString().length <= 1 ? "0$minute" : "$minute";
     String hourStr = hour.toString().length <= 1 ? "0$hour" : "$hour";
     return "${showHours ? '$hourStr:' : ''}$minuteStr:$secondStr";
-  }
-
-  void setId(String id) {
-    _countDownTimeId = id;
-  }
-
-  int getCurrentTimeInSeconds() {
-    return _currentTimeInSeconds;
-  }
-
-  void setCurrentTimeInSeconds(int time) {
-    _currentTimeInSeconds = time;
-  }
-
-  void startTimer(int timerDefaultValue, Function(int, Timer) timeCallback) {
-    const oneSecondDurantion = Duration(seconds: 1);
-    _timerInstance = Timer.periodic(
-      oneSecondDurantion,
-      (Timer timer) {
-        final timerResetPending =
-            CountDownTimeController.popCountDownTimeRenewId(_countDownTimeId);
-        _currentTimeInSeconds = timerResetPending != '-1'
-            ? timerDefaultValue
-            : _currentTimeInSeconds - 1;
-        timeCallback(_currentTimeInSeconds, timer);
-      },
-    );
-  }
-
-  void stopTimer() {
-    _timerInstance?.cancel();
   }
 }

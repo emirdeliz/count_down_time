@@ -33,21 +33,18 @@ Future<void> makeApp(WidgetTester tester,
   if (hasTimeStartInHours) {
     await tester.pumpWidget(MaterialApp(
         home: CountDownTimeApp.hours(
-            id: 'test-1',
             color: color ?? Colors.black,
             fontSize: fontSize ?? 15,
             timeStartInHours: timeStartInHours)));
   } else if (hasTimeStartInMinutes) {
     await tester.pumpWidget(MaterialApp(
         home: CountDownTimeApp.minutes(
-            id: 'test-1',
             color: color ?? Colors.black,
             fontSize: fontSize ?? 15,
             timeStartInMinutes: timeStartInMinutes)));
   } else {
     await tester.pumpWidget(MaterialApp(
         home: CountDownTimeApp(
-            id: 'test-1',
             color: color ?? Colors.black,
             fontSize: fontSize ?? 15,
             timeStartInSeconds: timeStartInSeconds ?? 30)));
