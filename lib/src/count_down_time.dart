@@ -11,7 +11,7 @@ class CountDownTime extends StatefulWidget {
 
   const CountDownTime({
     Key? key,
-    this.timeStartInSeconds = 15, // or 15 minutes
+    this.timeStartInSeconds = 15, // or 15 seconds
     this.color,
     this.fontSize,
     this.controller,
