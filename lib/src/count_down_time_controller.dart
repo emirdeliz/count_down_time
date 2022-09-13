@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:count_down_time/count_down_time.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -8,10 +7,14 @@ class CountDownTimeController extends ChangeNotifier {
   int currentTimerSeconds = 0;
   Timer? timerInstance;
 
+  CountDownTimeController({this.timeStartInSeconds = 15});
+
   void startTimer(int timerDefaultValue, Function(int) timeCallback) {
+    currentTimerSeconds = timeStartInSeconds;
     timerInstance = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) {
+        setCurrentTimeInSeconds(currentTimerSeconds - 1);
         timeCallback(currentTimerSeconds);
       },
     );
@@ -34,7 +37,7 @@ class CountDownTimeController extends ChangeNotifier {
     return currentTimerSeconds;
   }
 
-  String getCurrengetCurrentTimeInSecondsFormatted() {
+  String getCurrentTimeInSecondsFormatted() {
     return formatSecondsToTime(currentTimerSeconds, timeStartInSeconds);
   }
 

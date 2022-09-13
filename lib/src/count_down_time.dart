@@ -55,23 +55,38 @@ class CountDownTime extends StatefulWidget {
 
 class _CountDownTimeState extends State<CountDownTime>
     with SingleTickerProviderStateMixin {
+  String currentTimeInSecondsFormatted = '';
   late CountDownTimeController _controller;
 
   void _initialize() {
-    _controller = widget.controller ?? CountDownTimeController();
-    _controller.setTimeStartInSeconds(widget.timeStartInSeconds);
+    _controller = widget.controller ??
+        CountDownTimeController(timeStartInSeconds: widget.timeStartInSeconds);
+    _initializeCountDownTimeProps();
+    _initializeCountDownTimeControllerListener();
+    _startTimer();
+  }
+
+  void _initializeCountDownTimeProps() {
     final onChangeTime = widget.onChangeTime;
     if (onChangeTime != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         onChangeTime(_controller.getCurrentTimeInSeconds());
       });
     }
-    _startTimer();
+  }
+
+  void _initializeCountDownTimeControllerListener() {
+    _controller.addListener(() {
+      setState(() {
+        currentTimeInSecondsFormatted =
+            _controller.getCurrentTimeInSecondsFormatted();
+      });
+    });
   }
 
   void _startTimer() {
     _controller.startTimer(widget.timeStartInSeconds, (timeCurrent) {
-      final reachedTimeOut = timeCurrent == 0;
+      final reachedTimeOut = timeCurrent < 0;
       if (reachedTimeOut) {
         _controller.stopTimer();
         final onTimeOut = widget.onTimeOut;
@@ -83,9 +98,8 @@ class _CountDownTimeState extends State<CountDownTime>
   }
 
   Widget _buildTimerCount() {
-    final time = _controller.getCurrengetCurrentTimeInSecondsFormatted();
     return Text(
-      time,
+      currentTimeInSecondsFormatted,
       style: TextStyle(
         color: widget.color,
         fontSize: widget.fontSize,
@@ -95,8 +109,8 @@ class _CountDownTimeState extends State<CountDownTime>
 
   @override
   void initState() {
-    super.initState();
     _initialize();
+    super.initState();
   }
 
   @override

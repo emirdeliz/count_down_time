@@ -42,7 +42,18 @@ class CountDownTimeApp extends StatefulWidget {
 
 class _CountDownTimeAppState extends State<CountDownTimeApp> {
   bool timeoutReached = false;
-  CountDownTimeController controller = CountDownTimeController();
+  CountDownTimeController? controller;
+
+  void _initialize() {
+    controller =
+        CountDownTimeController(timeStartInSeconds: widget.timeStartInSeconds);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initialize();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +65,7 @@ class _CountDownTimeAppState extends State<CountDownTimeApp> {
           CountDownTime(
             color: widget.color,
             fontSize: widget.fontSize,
+            controller: controller,
             timeStartInSeconds: widget.timeStartInSeconds,
             onChangeTime: (time) {
               setState(() {
@@ -72,7 +84,7 @@ class _CountDownTimeAppState extends State<CountDownTimeApp> {
               child: ElevatedButton(
                 child: const Text('Restart count'),
                 onPressed: () {
-                  controller.resetTimer();
+                  controller?.resetTimer();
                 },
               )),
           Padding(
