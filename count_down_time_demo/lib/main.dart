@@ -28,7 +28,7 @@ class _CountDownTimeAppDemoState extends State<CountDownTimeAppDemo> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 const CountDownTimeApp(
-                    color: Colors.red, fontSize: 35, timeStartInSeconds: 30),
+                    color: Colors.red, fontSize: 35, timeStartInSeconds: 3),
                 CountDownTimeApp.minutes(
                     color: Colors.red, fontSize: 35, timeStartInMinutes: 2),
                 CountDownTimeApp.hours(

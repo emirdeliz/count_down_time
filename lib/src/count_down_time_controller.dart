@@ -29,7 +29,7 @@ class CountDownTimeController extends ChangeNotifier {
   }
 
   void setCurrentTimeInSeconds(int value) {
-    currentTimerSeconds = value;
+    currentTimerSeconds = value >= 0 ? value : 0;
     notifyListeners();
   }
 
