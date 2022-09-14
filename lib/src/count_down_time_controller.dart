@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:count_down_time/count_down_time.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class CountDownTimeController extends ChangeNotifier {
   int timeStartInSeconds = 0;
