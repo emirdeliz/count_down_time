@@ -1,6 +1,6 @@
 name: count_down_time
 description: A count-down timer package.
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/emirdeliz/count_down_time
 
 environment:

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 class CountDownTime extends StatefulWidget {
   final int timeStartInSeconds;
-  final double? fontSize;
-  final Color? color;
+  final TextStyle? textStyle;
   final CountDownTimeController? controller;
   final Function(int time)? onChangeTime;
   final Function()? onTimeOut;
@@ -12,8 +11,7 @@ class CountDownTime extends StatefulWidget {
   const CountDownTime({
     Key? key,
     this.timeStartInSeconds = 15, // or 15 seconds
-    this.color,
-    this.fontSize,
+    this.textStyle,
     this.controller,
     this.onChangeTime,
     this.onTimeOut,
@@ -26,28 +24,24 @@ class CountDownTime extends StatefulWidget {
 
   factory CountDownTime.minutes(
       {int? timeStartInMinutes,
-      double? fontSize,
-      Color? color,
+      TextStyle? textStyle,
       Function(int time)? onChangeTime,
       required Function() onTimeOut}) {
     return CountDownTime(
         timeStartInSeconds: (timeStartInMinutes ?? 1) * 60,
-        fontSize: fontSize,
-        color: color,
+        textStyle: textStyle,
         onChangeTime: onChangeTime,
         onTimeOut: onTimeOut);
   }
 
   factory CountDownTime.hours(
       {int? timeStartInHours,
-      double? fontSize,
-      Color? color,
+      TextStyle? textStyle,
       Function(int time)? onChangeTime,
       required Function() onTimeOut}) {
     return CountDownTime.minutes(
         timeStartInMinutes: (timeStartInHours ?? 1) * 60,
-        fontSize: fontSize,
-        color: color,
+        textStyle: textStyle,
         onChangeTime: onChangeTime,
         onTimeOut: onTimeOut);
   }
@@ -59,8 +53,8 @@ class _CountDownTimeState extends State<CountDownTime>
   late CountDownTimeController _controller;
 
   void _initialize() {
-    _controller = widget.controller ??
-        CountDownTimeController(timeStartInSeconds: widget.timeStartInSeconds);
+    _controller = widget.controller ?? CountDownTimeController();
+    _controller.setTimeStartInSeconds(widget.timeStartInSeconds);
     _initializeCountDownTimeProps();
     _initializeCountDownTimeControllerListener();
     _startTimer();
@@ -100,10 +94,10 @@ class _CountDownTimeState extends State<CountDownTime>
   Widget _buildTimerCount() {
     return Text(
       currentTimeInSecondsFormatted,
-      style: TextStyle(
-        color: widget.color,
-        fontSize: widget.fontSize,
-      ),
+      style: widget.textStyle ??
+          const TextStyle(
+            fontSize: 10,
+          ),
     );
   }
 

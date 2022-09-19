@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:count_down_time/count_down_time.dart';
 
 class CountDownTimeApp extends StatefulWidget {
-  final Color color;
-  final double fontSize;
+  final TextStyle textStyle;
   final int timeStartInSeconds;
 
   const CountDownTimeApp(
-      {Key? key,
-      required this.color,
-      required this.fontSize,
-      required this.timeStartInSeconds})
+      {Key? key, required this.textStyle, required this.timeStartInSeconds})
       : super(key: key);
 
   @override
@@ -19,24 +15,17 @@ class CountDownTimeApp extends StatefulWidget {
   }
 
   factory CountDownTimeApp.minutes(
-      {required int timeStartInMinutes,
-      required double fontSize,
-      required Color color}) {
+      {required int timeStartInMinutes, required TextStyle textStyle}) {
     return CountDownTimeApp(
-        timeStartInSeconds: timeStartInMinutes * 60,
-        fontSize: fontSize,
-        color: color);
+        timeStartInSeconds: timeStartInMinutes * 60, textStyle: textStyle);
   }
 
   factory CountDownTimeApp.hours({
     required int timeStartInHours,
-    required double fontSize,
-    required Color color,
+    required TextStyle textStyle,
   }) {
     return CountDownTimeApp.minutes(
-        timeStartInMinutes: timeStartInHours * 60,
-        fontSize: fontSize,
-        color: color);
+        timeStartInMinutes: timeStartInHours * 60, textStyle: textStyle);
   }
 }
 
@@ -45,8 +34,7 @@ class _CountDownTimeAppState extends State<CountDownTimeApp> {
   CountDownTimeController? controller;
 
   void _initialize() {
-    controller =
-        CountDownTimeController(timeStartInSeconds: widget.timeStartInSeconds);
+    controller = CountDownTimeController();
   }
 
   @override
@@ -63,8 +51,7 @@ class _CountDownTimeAppState extends State<CountDownTimeApp> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CountDownTime(
-            color: widget.color,
-            fontSize: widget.fontSize,
+            textStyle: widget.textStyle,
             controller: controller,
             timeStartInSeconds: widget.timeStartInSeconds,
             onChangeTime: (time) {

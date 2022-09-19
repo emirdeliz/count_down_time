@@ -7,8 +7,6 @@ class CountDownTimeController extends ChangeNotifier {
   int currentTimerSeconds = 0;
   Timer? timerInstance;
 
-  CountDownTimeController({this.timeStartInSeconds = 15});
-
   void startTimer(int timerDefaultValue, Function(int) timeCallback) {
     currentTimerSeconds = timeStartInSeconds;
     timerInstance = Timer.periodic(
@@ -59,7 +57,6 @@ class CountDownTimeController extends ChangeNotifier {
     int hour = dateBase.hour;
 
     bool showHours = (timeStartInSeconds / 3600).floor() > 0;
-
     String secondStr = second.toString().length <= 1 ? "0$second" : "$second";
     String minuteStr = minute.toString().length <= 1 ? "0$minute" : "$minute";
     String hourStr = hour.toString().length <= 1 ? "0$hour" : "$hour";

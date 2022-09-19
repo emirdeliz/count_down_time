@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: avoid_relative_lib_imports
-import '../count_down_time_demo/lib/count_down_time_app.dart';
+import '../example/lib/count_down_time_app.dart';
 
 const retryLimit = 10;
 
@@ -33,20 +33,22 @@ Future<void> makeApp(WidgetTester tester,
   if (hasTimeStartInHours) {
     await tester.pumpWidget(MaterialApp(
         home: CountDownTimeApp.hours(
-            color: color ?? Colors.black,
-            fontSize: fontSize ?? 15,
+            textStyle: TextStyle(
+                color: color ?? Colors.black, fontSize: fontSize ?? 15),
             timeStartInHours: timeStartInHours)));
   } else if (hasTimeStartInMinutes) {
     await tester.pumpWidget(MaterialApp(
         home: CountDownTimeApp.minutes(
-            color: color ?? Colors.black,
-            fontSize: fontSize ?? 15,
+            textStyle: TextStyle(
+              color: color ?? Colors.black,
+              fontSize: fontSize ?? 15,
+            ),
             timeStartInMinutes: timeStartInMinutes)));
   } else {
     await tester.pumpWidget(MaterialApp(
         home: CountDownTimeApp(
-            color: color ?? Colors.black,
-            fontSize: fontSize ?? 15,
+            textStyle: TextStyle(
+                color: color ?? Colors.black, fontSize: fontSize ?? 15),
             timeStartInSeconds: timeStartInSeconds ?? 30)));
   }
   await tester.pumpAndSettle();
