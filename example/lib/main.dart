@@ -28,11 +28,14 @@ class _CountDownTimeAppDemoState extends State<CountDownTimeAppDemo> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 const CountDownTimeApp(
-                    color: Colors.red, fontSize: 35, timeStartInSeconds: 3),
+                    textStyle: TextStyle(color: Colors.red, fontSize: 35),
+                    timeStartInSeconds: 3),
                 CountDownTimeApp.minutes(
-                    color: Colors.red, fontSize: 35, timeStartInMinutes: 2),
+                    textStyle: const TextStyle(color: Colors.red, fontSize: 35),
+                    timeStartInMinutes: 2),
                 CountDownTimeApp.hours(
-                    color: Colors.red, fontSize: 35, timeStartInHours: 2)
+                    textStyle: const TextStyle(color: Colors.red, fontSize: 35),
+                    timeStartInHours: 2)
               ],
             )),
       ),
