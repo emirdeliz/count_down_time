@@ -1,6 +1,6 @@
 name: count_down_time
-description: A count-down timer package.
-version: 0.0.4
+description: A count-down timer package with options to reset and set current time.
+version: 0.0.5
 homepage: https://github.com/emirdeliz/count_down_time
 
 environment:
@@ -34,6 +34,14 @@ flutter:
   # adding or updating assets for this project.
   plugin:
     platforms:
+      android:
+      ios:
+      linux:
+      macos:
+      web:
+      windows:
+
+
     # This plugin project was generated without specifying any
     # platforms with the `--platform` argument. If you see the `some_platform` map below, remove it and
     # then add platforms following the instruction here:

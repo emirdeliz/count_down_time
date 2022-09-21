@@ -17,8 +17,6 @@ Column(
   children: [
   CountDownTime(
   timeId: 'simple-timer',
-  color: Colors.red,
-  fontSize: 15,
   timeStartInSeconds: 30,
   onChangeTime: (time) {
     setState(() {
@@ -54,8 +52,7 @@ About the props:
 |-----------|----------|---------------------------------------------------------------------|
 | **timeId** | String | Define the timer id. |
 | **timeStartInSeconds** | int | Define the time to start the count-down in seconds. |
-| **fontSize (optional)** | double | Define the fontSize of timer. |
-| **color (optional)** | Color | Define the color of timer. |
+| **textStyle (optional)** | textStyle | Define the style of timer. |
 | **onTimeOut** | Function | Define the callback when the count-down is finished. |
 | **onChangeTime** | Function(int time) | Define the callback when the count-down is changed. |
 
