@@ -55,18 +55,9 @@ class _CountDownTimeState extends State<CountDownTime>
   void _initialize() {
     _controller = widget.controller ?? CountDownTimeController();
     _controller.setTimeStartInSeconds(widget.timeStartInSeconds);
-    _initializeCountDownTimeProps();
-    _initializeCountDownTimeControllerListener();
-    _startTimer();
-  }
 
-  void _initializeCountDownTimeProps() {
-    final onChangeTime = widget.onChangeTime;
-    if (onChangeTime != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        onChangeTime(_controller.getCurrentTimeInSeconds());
-      });
-    }
+    _startTimer();
+    _initializeCountDownTimeControllerListener();
   }
 
   void _initializeCountDownTimeControllerListener() {
@@ -80,13 +71,11 @@ class _CountDownTimeState extends State<CountDownTime>
 
   void _startTimer() {
     _controller.startTimer(widget.timeStartInSeconds, (timeCurrent) {
-      final reachedTimeOut = timeCurrent < 0;
+      _maybeTriggerOnChangeTimeProp();
+      final reachedTimeOut = timeCurrent <= 0;
       if (reachedTimeOut) {
+        _maybeTriggerOnTimeOutProp();
         _controller.stopTimer();
-        final onTimeOut = widget.onTimeOut;
-        if (onTimeOut != null) {
-          onTimeOut();
-        }
       }
     });
   }
@@ -99,6 +88,20 @@ class _CountDownTimeState extends State<CountDownTime>
             fontSize: 10,
           ),
     );
+  }
+
+  void _maybeTriggerOnTimeOutProp() {
+    final onTimeOut = widget.onTimeOut;
+    if (onTimeOut != null) {
+      onTimeOut();
+    }
+  }
+
+  void _maybeTriggerOnChangeTimeProp() {
+    final onChangeTime = widget.onChangeTime;
+    if (onChangeTime != null) {
+      onChangeTime(_controller.getCurrentTimeInSeconds());
+    }
   }
 
   @override
