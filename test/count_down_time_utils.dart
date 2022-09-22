@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: avoid_relative_lib_imports
-import '../example/lib/count_down_time_app.dart';
+import '../example/lib/count_down_time_example.dart';
 
 const retryLimit = 10;
 

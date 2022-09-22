@@ -7,13 +7,20 @@ class CountDownTimeController extends ChangeNotifier {
   int currentTimerSeconds = 0;
   Timer? timerInstance;
 
-  void startTimer(int timerDefaultValue, Function(int) timeCallback) {
+  void startTimer(int timerDefaultValue, [Function(int)? timeCallback]) {
+    bool hasTimerInstanceRunning = timerInstance != null;
+    if (hasTimerInstanceRunning) {
+      timerInstance?.cancel();
+    }
+
     currentTimerSeconds = timeStartInSeconds;
     timerInstance = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) {
         setCurrentTimeInSeconds(currentTimerSeconds - 1);
-        timeCallback(currentTimerSeconds);
+        if (timeCallback != null) {
+          timeCallback(currentTimerSeconds);
+        }
       },
     );
   }
