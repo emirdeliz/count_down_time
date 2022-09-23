@@ -2,10 +2,19 @@ import 'package:count_down_time/count_down_time.dart';
 import 'package:flutter/material.dart';
 
 class CountDownTime extends StatefulWidget {
+  /// A variable that is used to set the time that the timer will start at.
   final int timeStartInSeconds;
+
+  /// Custom textStyle to the widget.
   final TextStyle? textStyle;
+
+  /// Custom controller to the widget.
   final CountDownTimeController? controller;
+
+  /// Callback function runs when the time is changed.
   final Function(int time)? onChangeTime;
+
+  /// Callback function runs when the count down is done.
   final Function()? onTimeOut;
 
   const CountDownTime({
@@ -22,6 +31,7 @@ class CountDownTime extends StatefulWidget {
     return _CountDownTimeState();
   }
 
+  /// A factory constructor to build a CountDownTime using minutes as the start time.
   factory CountDownTime.minutes(
       {int? timeStartInMinutes,
       TextStyle? textStyle,
@@ -34,6 +44,7 @@ class CountDownTime extends StatefulWidget {
         onTimeOut: onTimeOut);
   }
 
+  /// A factory constructor to build a CountDownTime using hours as the start time.
   factory CountDownTime.hours(
       {int? timeStartInHours,
       TextStyle? textStyle,
@@ -49,9 +60,13 @@ class CountDownTime extends StatefulWidget {
 
 class _CountDownTimeState extends State<CountDownTime>
     with SingleTickerProviderStateMixin {
+  /// A variable that is used to store the current time in seconds formatted.
   String currentTimeInSecondsFormatted = '';
+
+  /// A default count down controller.
   late CountDownTimeController _controller;
 
+  /// Initialize the count down widget.
   void _initialize() {
     _controller = widget.controller ?? CountDownTimeController();
     _controller.setTimeStartInSeconds(widget.timeStartInSeconds);
@@ -60,6 +75,8 @@ class _CountDownTimeState extends State<CountDownTime>
     _initializeCountDownTimeControllerListener();
   }
 
+  /// It initializes the listener for the countDownTimeController.
+  /// Update the current time to display on the widget.
   void _initializeCountDownTimeControllerListener() {
     _controller.addListener(() {
       setState(() {
@@ -69,6 +86,7 @@ class _CountDownTimeState extends State<CountDownTime>
     });
   }
 
+  /// Starts a timer that counts down from the time specified in the timeStartInSeconds variable.
   void _startTimer() {
     _controller.startTimer(widget.timeStartInSeconds, (timeCurrent) {
       _maybeTriggerOnChangeTimeProp();
@@ -80,6 +98,7 @@ class _CountDownTimeState extends State<CountDownTime>
     });
   }
 
+  /// It returns a widget that displays the current time in a Text widget.
   Widget _buildTimerCount() {
     return Text(
       currentTimeInSecondsFormatted,
@@ -90,6 +109,7 @@ class _CountDownTimeState extends State<CountDownTime>
     );
   }
 
+  /// If the `onTimeout` property is set, then call it
   void _maybeTriggerOnTimeOutProp() {
     final onTimeOut = widget.onTimeOut;
     if (onTimeOut != null) {
@@ -97,6 +117,7 @@ class _CountDownTimeState extends State<CountDownTime>
     }
   }
 
+  /// If the time prop has changed, trigger the onChangeTime prop
   void _maybeTriggerOnChangeTimeProp() {
     final onChangeTime = widget.onChangeTime;
     if (onChangeTime != null) {

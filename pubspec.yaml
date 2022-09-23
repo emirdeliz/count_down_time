@@ -1,6 +1,6 @@
 name: count_down_time
 description: A count-down timer package with options to reset and set current time.
-version: 0.0.6
+version: 0.0.7
 homepage: https://github.com/emirdeliz/count_down_time
 
 environment:
